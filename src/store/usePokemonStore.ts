@@ -45,6 +45,7 @@ export const usePokemonStore = create<PokemonStore>((set, get) => ({
         error instanceof Error ? error.message : "Error al cargar los Pokémon";
       set({ error: errorMessage });
     } finally {
+      set({ loadingMore: false });
       set({ loading: false });
     }
   },
