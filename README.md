@@ -1,5 +1,7 @@
 # PokeAPI React Native
 
+##
+
 Aplicación móvil construida con React Native y Expo para consultar Pokémon utilizando la [PokeAPI](https://pokeapi.co/).
 
 La aplicación permite:
@@ -33,6 +35,8 @@ pnpm --version
 ```
 
 ## Instalación
+
+##
 
 Clona el repositorio y entra en la carpeta del proyecto:
 
@@ -75,6 +79,20 @@ pnpm run ios
 ```
 
 Para ejecutar la aplicación en un dispositivo físico, instala Expo Go y escanea el código QR mostrado por Expo.
+
+## Calidad de código
+
+Ejecuta ESLint con:
+
+```bash
+pnpm run lint
+```
+
+## Cobertura de Test
+
+```bash
+pnpm run test -- --coverage
+```
 
 ## Scripts disponibles
 
@@ -164,14 +182,6 @@ Las peticiones HTTP están centralizadas en:
 
 ```text
 src/services/pokemonService.ts
-```
-
-## Calidad de código
-
-Ejecuta ESLint con:
-
-```bash
-pnpm run lint
 ```
 
 ## Notas
