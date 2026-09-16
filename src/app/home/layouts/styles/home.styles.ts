@@ -9,7 +9,6 @@ const homeStyles = StyleSheet.create({
   pokemonLogo: {
     width: "90%",
     height: 100,
-    resizeMode: "contain",
     marginBottom: 16,
     marginTop: 8,
   },

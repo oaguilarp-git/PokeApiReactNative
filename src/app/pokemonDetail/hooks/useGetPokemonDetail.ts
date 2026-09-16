@@ -8,24 +8,20 @@ const useGetPokemonDetail = (namePokemon: string) => {
   const [pokemonDetail, setPokemonDetail] = useState<PokemonDetail | null>(
     null,
   );
-
-  const getPokemonDetail = async () => {
-    try {
-      setLoadingDetail(true);
-      const resp = await getDetailService(namePokemon);
-      setPokemonDetail(resp);
-    } catch (error: any) {
-      setError(
-        error instanceof Error ? error.message : "Error al cargar el Pokémon",
-      );
-    } finally {
-      setLoadingDetail(false);
-    }
-  };
-
   useEffect(() => {
-    void getPokemonDetail();
-  }, []);
+    getDetailService(namePokemon)
+      .then((response) => {
+        setPokemonDetail(response);
+      })
+      .catch((cause: unknown) => {
+        setError(
+          cause instanceof Error ? cause.message : "Error al cargar el Pokémon",
+        );
+      })
+      .finally(() => {
+        setLoadingDetail(false);
+      });
+  }, [namePokemon]);
 
   return {
     loadingDetail,
