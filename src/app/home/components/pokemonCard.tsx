@@ -32,6 +32,7 @@ const PokemonCard = ({ pokemonName, num }: Props) => {
           uri: urlImages.replace("NUM", num),
         }}
         style={stylesCard.image}
+        resizeMode="contain"
       />
 
       <Text style={stylesCard.name}>

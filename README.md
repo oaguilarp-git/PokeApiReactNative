@@ -1,56 +1,185 @@
-# Welcome to your Expo app 👋
+# PokeAPI React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicación móvil construida con React Native y Expo para consultar Pokémon utilizando la [PokeAPI](https://pokeapi.co/).
 
-## Get started
+La aplicación permite:
 
-1. Install dependencies
+- Consultar un listado de Pokémon.
+- Cargar más Pokémon mediante paginación.
+- Navegar al detalle de un Pokémon.
+- Visualizar su imagen, tipos, habilidades, estadísticas, altura, peso y movimientos.
+- Puede ejecutarse en Android, iOS y web.
 
-   ```bash
-   npm install
-   ```
+## Tecnologías extras utilizadas
 
-2. Start the app
+- Zustand: para la persistencia de los datos, mejorando el performance de la app.
+- Axios: para centralizar los llamados a la API y dar la opcion de extender a un interceptor.
 
-   ```bash
-   npx expo start
-   ```
+## Requisitos
 
-In the output, you'll find options to open the app in a
+Antes de iniciar el proyecto, instala:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js
+- pnpm
+- Expo CLI, incluido mediante las dependencias del proyecto
+- Android Studio para ejecutar Android
+- Xcode para ejecutar iOS, únicamente en macOS
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Puedes verificar Node.js y pnpm con:
 
 ```bash
-npm run reset-project
+node --version
+pnpm --version
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Instalación
 
-### Other setup steps
+Clona el repositorio y entra en la carpeta del proyecto:
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+git clone https://github.com/oaguilarp-git/PokeApiReactNative
+```
 
-## Learn more
+Instala las dependencias:
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+pnpm install
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Ejecución
 
-## Join the community
+Inicia el servidor de desarrollo de Expo:
 
-Join our community of developers creating universal apps.
+```bash
+pnpm start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+También puedes iniciar directamente una plataforma específica:
+
+### Web
+
+```bash
+pnpm run web
+```
+
+### Android
+
+```bash
+pnpm run android
+```
+
+### iOS
+
+```bash
+pnpm run ios
+```
+
+Para ejecutar la aplicación en un dispositivo físico, instala Expo Go y escanea el código QR mostrado por Expo.
+
+## Scripts disponibles
+
+| Comando            | Descripción                           |
+| ------------------ | ------------------------------------- |
+| `pnpm start`       | Inicia Expo                           |
+| `pnpm run web`     | Ejecuta la aplicación en el navegador |
+| `pnpm run android` | Ejecuta la aplicación en Android      |
+| `pnpm run ios`     | Ejecuta la aplicación en iOS          |
+| `pnpm run lint`    | Ejecuta ESLint                        |
+| `pnpm run test`    | Ejecuta las pruebas con Jest          |
+
+## Estructura del proyecto
+
+```text
+PokeApiRN/
+├── assets/
+│   ├── images/
+│   └── tabIcons/
+├── src/
+│   ├── app/
+│   │   ├── home/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── layouts/
+│   │   │   └── styles/
+│   │   └── pokemonDetail/
+│   │       ├── components/
+│   │       ├── hooks/
+│   │       ├── layouts/
+│   │       └── styles/
+│   ├── models/
+│   ├── navigation/
+│   ├── services/
+│   └── store/
+├── app.json
+├── eslint.config.js
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+## Arquitectura
+
+La aplicación está organizada por funcionalidades:
+
+### Home
+
+La pantalla principal se encuentra en:
+
+```text
+src/app/home/
+```
+
+Incluye:
+
+- `Home.tsx`: pantalla principal.
+- `PokemonList.tsx`: listado de Pokémon.
+- `pokemonCard.tsx`: tarjeta individual.
+- `useGetPokemons.ts`: hook que conecta la pantalla con Zustand.
+- `home.styles.ts` y `Card.styles.ts`: estilos de la pantalla y las tarjetas.
+
+La pantalla obtiene los Pokémon desde el store y permite solicitar más resultados cuando el usuario llega al final del listado.
+
+### Detalle del Pokémon
+
+La funcionalidad de detalle se encuentra en:
+
+```text
+src/app/pokemonDetail/
+```
+
+Incluye componentes para mostrar:
+
+- Imagen.
+- Nombre, identificador y tipos.
+- Habilidades.
+- Altura y peso.
+- Estadísticas.
+- Movimientos.
+
+El nombre del Pokémon se recibe mediante los parámetros de navegación y se utiliza para consultar su información completa en la API.
+
+## Consumo de la API
+
+Las peticiones HTTP están centralizadas en:
+
+```text
+src/services/pokemonService.ts
+```
+
+## Calidad de código
+
+Ejecuta ESLint con:
+
+```bash
+pnpm run lint
+```
+
+## Notas
+
+La aplicación requiere conexión a Internet para consultar la PokeAPI.
+
+Si se modifica la estructura de navegación, las rutas o la configuración de Expo, puede ser necesario reiniciar el servidor limpiando la caché:
+
+```bash
+pnpm exec expo start --clear
+```

@@ -19,19 +19,12 @@ const stylesCard = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.08,
-    shadowRadius: 5,
-    elevation: 3,
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+    elevation: 5,
   },
   image: {
     width: "90%",
     height: "68%",
-    resizeMode: "contain",
   },
   name: {
     color: "#17213D",
